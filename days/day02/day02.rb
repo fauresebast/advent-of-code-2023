@@ -3,7 +3,10 @@ module Day02
     input.split("\n").map do |line|
       _, data = line.split(":")
       data.split(";").map do |set|
-        set.split(",").map {|c| n, color = c.split; [n.to_i, color]}
+        set.split(",").map { |c|
+          n, color = c.split
+          [n.to_i, color]
+        }
       end
     end
   end
@@ -11,11 +14,11 @@ module Day02
   def self.part1(input)
     to_match = {"red" => 12, "green" => 13, "blue" => 14}
     parse(input).map.with_index(1) do |game, index|
-      game.all? do |sets|
+      (game.all? do |sets|
         sets.all? do |n, color|
           n <= to_match[color]
         end
-      end ? index : 0
+      end) ? index : 0
     end.sum
   end
 
