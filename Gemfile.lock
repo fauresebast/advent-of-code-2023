@@ -2,12 +2,32 @@ GEM
   remote: https://rubygems.org/
   specs:
     abbrev (0.1.1)
+    activesupport (7.1.2)
+      base64
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      connection_pool (>= 2.2.5)
+      drb
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      mutex_m
+      tzinfo (~> 2.0)
     ast (2.4.2)
+    base64 (0.2.0)
+    bigdecimal (3.1.4)
+    concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     diff-lcs (1.5.0)
+    drb (2.2.0)
+      ruby2_keywords
+    i18n (1.14.1)
+      concurrent-ruby (~> 1.0)
     json (2.7.0)
     language_server-protocol (3.17.0.3)
     lint_roller (1.1.0)
     matrix (0.4.2)
+    minitest (5.20.0)
+    mutex_m (0.2.0)
     parallel (1.23.0)
     parser (3.2.2.4)
       ast (~> 2.4.1)
@@ -48,6 +68,7 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
     standard (1.32.1)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
@@ -64,6 +85,8 @@ GEM
       standard
     typeprof (0.21.8)
       rbs (>= 1.8.1)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
 
 PLATFORMS
@@ -71,6 +94,7 @@ PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
+  activesupport
   matrix
   rbs
   rspec
