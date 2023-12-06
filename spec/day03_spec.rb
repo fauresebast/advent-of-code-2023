@@ -11,7 +11,7 @@ RSpec.describe Day03, "#solve" do
   end
 
   it "part 2 works with sample" do
-    str = File.read("./days/day03/sample2")
+    str = File.read("./days/day03/sample")
     expect(Day03.part2(str)).to eq 467835
   end
 
