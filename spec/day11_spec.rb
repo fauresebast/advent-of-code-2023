@@ -17,6 +17,6 @@ RSpec.describe Day11, "#solve" do
 
   it "part 2 works with input" do
     str = File.read("./days/day11/input")
-    expect(Day11.part2(str)).to eq nil
+    expect(Day11.part2(str)).to eq 382979724122
   end
 end

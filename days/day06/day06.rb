@@ -1,8 +1,8 @@
-require 'set'
+require "set"
 module Day06
   def self.parse(input)
-    times = input.lines[0].scan(/\d+/).map &:to_i
-    distances = input.lines[1].scan(/\d+/).map &:to_i
+    times = input.lines[0].scan(/\d+/).map(&:to_i)
+    distances = input.lines[1].scan(/\d+/).map(&:to_i)
     times.zip(distances).to_a
   end
 

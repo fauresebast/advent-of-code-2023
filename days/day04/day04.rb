@@ -3,7 +3,7 @@ module Day04
     cards = {}
     input.each_line do |line|
       card, series = line.split(": ")
-      winning, numbers = series.split(" | ").map{|s| s.split.map(&:to_i)}
+      winning, numbers = series.split(" | ").map { |s| s.split.map(&:to_i) }
       cards[card[/\d+/].to_i] = [winning, numbers]
     end
     cards
@@ -13,7 +13,7 @@ module Day04
     cards = parse(input)
     cards.sum do |_, (winning, numbers)|
       common = winning & numbers
-      common.size.zero? ? 0 : 2 ** (common.size - 1)
+      common.size.zero? ? 0 : 2**(common.size - 1)
     end
   end
 
@@ -25,7 +25,7 @@ module Day04
       id, (winning, numbers) = q.shift
       sum += 1
       common = winning & numbers
-      (id+1...id+1+common.size).each do |new_id|
+      (id + 1...id + 1 + common.size).each do |new_id|
         q << [new_id, cards[new_id]]
       end
     end

@@ -10,7 +10,6 @@ RSpec.describe Day08, "#solve" do
     expect(Day08.part1(str)).to eq 6
   end
 
-
   it "part 1 works with input" do
     str = File.read("./days/day08/input")
     expect(Day08.part1(str)).to eq 13939

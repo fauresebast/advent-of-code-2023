@@ -4,7 +4,7 @@ module Day11
   end
 
   def self.empty_rows(universe)
-    universe.each_with_index.filter{|r, i| r.count(".") == r.size}.to_h {|r, i| [i, true]}
+    universe.each_with_index.filter { |r, i| r.count(".") == r.size }.to_h { |r, i| [i, true] }
   end
 
   def self.compute(input, coef)
@@ -20,13 +20,13 @@ module Day11
     total_path_size = 0
     (0...galaxies.size).each do |start_index|
       start = galaxies[start_index]
-      (start_index+1...galaxies.size).each do |goal_index|
+      (start_index + 1...galaxies.size).each do |goal_index|
         goal = galaxies[goal_index]
         total_path_size += (start[0] - goal[0]).abs + (start[1] - goal[1]).abs
         start_row, end_row = [start[0], goal[0]].sort
-        (start_row+1...end_row).each {|r| total_path_size += coef-1 if doubling_rows[r]}
+        (start_row + 1...end_row).each { |r| total_path_size += coef - 1 if doubling_rows[r] }
         start_col, end_col = [start[1], goal[1]].sort
-        (start_col+1...end_col).each {|r| total_path_size += coef-1 if doubling_cols[r]}
+        (start_col + 1...end_col).each { |r| total_path_size += coef - 1 if doubling_cols[r] }
       end
     end
     total_path_size

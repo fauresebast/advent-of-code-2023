@@ -3,7 +3,10 @@ module Day08
     lines = input.lines
     [
       lines[0].chomp,
-      lines[2..].map{|line| k, l, r = line.scan(/[A-Z]{3}/); [k, {"L" => l, "R" => r}]}.to_h
+      lines[2..].map { |line|
+        k, l, r = line.scan(/[A-Z]{3}/)
+        [k, {"L" => l, "R" => r}]
+      }.to_h
     ]
   end
 
@@ -23,7 +26,7 @@ module Day08
 
   def self.part2(input)
     instructions, nodes = parse(input)
-    ghosts = nodes.keys.filter{|k| k[-1] == "A"}
+    ghosts = nodes.keys.filter { |k| k[-1] == "A" }
     path_size = ghosts.map do |current|
       index = 0
       step = 0
