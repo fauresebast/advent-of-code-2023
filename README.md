@@ -13,6 +13,7 @@
 - Day11 : ⭐⭐
 - Day12 : ⭐
 - Day13 : ⭐⭐
+- Day14 : ⭐⭐
 
 ## Comments
 - Day04 part2 is really slow and can be improved
