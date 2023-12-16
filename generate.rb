@@ -1,8 +1,6 @@
-if ARGV.size < 1
-  puts "Missing date number (format %O2d)"
-end
+require "date"
 
-DATE_NUMBER = ARGV[0]
+DATE_NUMBER = ARGV[0] || Date.today.day
 
 # Assuming that the days/ and spec/ folders exists
 

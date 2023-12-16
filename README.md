@@ -17,6 +17,7 @@ TOTAL : 29/50 - 58%
 - Day13 : ⭐⭐
 - Day14 : ⭐⭐
 - Day15 : ⭐⭐
+- Day16 : ⭐⭐
 
 ## Comments
 - Day04 part2 is really slow and can be improved
