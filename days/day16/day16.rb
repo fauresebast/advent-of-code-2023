@@ -34,9 +34,9 @@ module Day16
 
     def reflect!(mirror)
       matching_direction = if mirror == "/"
-        {:up => :right, :left => :down, :right => :up, :down => :left}
+        {up: :right, left: :down, right: :up, down: :left}
       elsif mirror == "\\"
-        {:up => :left, :right => :down, :left => :up,  :down => :right}
+        {up: :left, right: :down, left: :up, down: :right}
       else
         puts "UnknownMirror: mirror value:"
         p mirror
@@ -47,12 +47,12 @@ module Day16
     end
   end
 
-  def self.print_grid(grid, energized_tiles={})
+  def self.print_grid(grid, energized_tiles = {})
     height, width = grid.size, grid[0].size
     (0...height).each do |row|
       line = ""
       (0...width).each do |col|
-        line += energized_tiles[[row, col]] > 0 ? "#" : grid[row][col]
+        line += (energized_tiles[[row, col]] > 0) ? "#" : grid[row][col]
       end
       puts line
     end
@@ -73,11 +73,11 @@ module Day16
           obstacles[[row, col]] ||= []
           obstacles[[row, col]] << beam.direction
         end
-        if (grid[row][col] == "." ||
+        if grid[row][col] == "." ||
             (grid[row][col] == "-" && [:left, :right].include?(beam.direction)) ||
-            (grid[row][col] == "|" && [:up, :down].include?(beam.direction)))
-            beam.continue!
-            beams << beam
+            (grid[row][col] == "|" && [:up, :down].include?(beam.direction))
+          beam.continue!
+          beams << beam
         else
           case grid[row][col]
           when "|"
@@ -106,13 +106,12 @@ module Day16
     best_beam_score = 0
     height, width = grid.size, grid[0].size
     # form top edge
-    best_beam_score = [best_beam_score, (0...width).map{|c| run_beam(grid, Beam.new([0, c], :down))}.max].max
+    best_beam_score = [best_beam_score, (0...width).map { |c| run_beam(grid, Beam.new([0, c], :down)) }.max].max
     # from bottom edge
-    best_beam_score = [best_beam_score, (0...width).map{|c| run_beam(grid, Beam.new([height - 1, c], :up))}.max].max
+    best_beam_score = [best_beam_score, (0...width).map { |c| run_beam(grid, Beam.new([height - 1, c], :up)) }.max].max
     # from left edge
-    best_beam_score = [best_beam_score, (0...height).map{|r| run_beam(grid, Beam.new([r, 0], :right))}.max].max
+    best_beam_score = [best_beam_score, (0...height).map { |r| run_beam(grid, Beam.new([r, 0], :right)) }.max].max
     # from right edge
-    best_beam_score = [best_beam_score, (0...height).map{|r| run_beam(grid, Beam.new([r, width - 1], :left))}.max].max
-    best_beam_score
+    [best_beam_score, (0...height).map { |r| run_beam(grid, Beam.new([r, width - 1], :left)) }.max].max
   end
 end
