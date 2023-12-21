@@ -1,6 +1,6 @@
 # 🎄 Advent of Code 2023 🎄
 
-TOTAL : 35/50 - 70%
+TOTAL : 36/50 - 72%
 
 - Day01 : ⭐⭐
 - Day02 : ⭐⭐
@@ -22,6 +22,7 @@ TOTAL : 35/50 - 70%
 - Day18 : ⭐⭐
 - Day19 : ⭐
 - Day20 : ⭐
+- Day21 : ⭐
 
 ## Comments
 - Day04 part2 is really slow and can be improved
