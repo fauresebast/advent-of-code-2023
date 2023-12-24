@@ -1,12 +1,13 @@
+# standard:disable Security/Eval
 module Day19
   def self.parse(input)
     workflow_lines, part_lines = input.split("\n\n")
     workflows = workflow_lines.split("\n").to_h do |line|
       label = line[/^[a-z]+/]
-      flow = line[/(?<={).*(?=})/].gsub(/([a-z]{2,}|[A-Z])/){"'#$&'"}.gsub(":", " ? ").gsub(",", " : ").gsub(/(?<=:) [axm].*?\?.*?\:.*/){ "(#{_1})"}
-      [label, ->(x,m,a,s) { eval flow }]
+      flow = line[/(?<={).*(?=})/].gsub(/([a-z]{2,}|[A-Z])/) { "'#{$&}'" }.gsub(":", " ? ").gsub(",", " : ").gsub(/(?<=:) [axm].*?\?.*?:.*/) { "(#{_1})" }
+      [label, ->(x, m, a, s) { eval flow }]
     end
-    parts = part_lines.split("\n").map { |line| eval line.tr("=", ":")}
+    parts = part_lines.split("\n").map { |line| eval line.tr("=", ":") }
     [workflows, parts]
   end
 
@@ -24,21 +25,20 @@ module Day19
         current_workflow = workflows[res]
       end
       part_is_kept
-    end.sum {|part| part.values.sum}
+    end.sum { |part| part.values.sum }
   end
 
   def self.parse2(input)
-    workflow_lines, part_lines = input.split("\n\n")
-    workflows = workflow_lines.split("\n").to_h do |line|
+    workflow_lines, _ = input.split("\n\n")
+    workflow_lines.split("\n").to_h do |line|
       label = line[/^[a-z]+/]
-      flow = line[/(?<={).*(?=})/].gsub(/([a-z]{2,}|[A-Z])/){"'#$&'"}.gsub(":", " ? ").gsub(",", " : ").gsub(/(?<=:) [axm].*?\?.*?\:.*/){ "(#{_1})"}
+      flow = line[/(?<={).*(?=})/].gsub(/([a-z]{2,}|[A-Z])/) { "'#{$&}'" }.gsub(":", " ? ").gsub(",", " : ").gsub(/(?<=:) [axm].*?\?.*?:.*/) { "(#{_1})" }
       [label, flow]
     end
-    [workflows, part_lines.split("\n").size]
   end
 
   def self.part2(input)
-    workflows, parts_size = parse2(input)
+    workflows = parse2(input)
     accepted_ranges = []
     queue = [
       {
@@ -49,7 +49,7 @@ module Day19
           s: {start: 1, end: 4000}
         },
         workflow: workflows["in"]
-    }
+      }
     ]
     while queue.any?
       current = queue.shift
@@ -79,7 +79,7 @@ module Day19
             workflow: invalid.tr("()", "")
           }
         elsif eval(invalid) == "A"
-          accepted_ranges << {letter: letter, start: n, end:  current[:args][letter][:end]}
+          accepted_ranges << {letter: letter, start: n, end: current[:args][letter][:end]}
         elsif eval(invalid) != "R"
           new_args = current[:args].dup
           new_args[letter] = {start: n, end: current[:args][letter][:end]}
@@ -120,8 +120,9 @@ module Day19
       end
     end
     %i[x m a s].each do |l|
-      p accepted_ranges.filter{|r| r[:letter] == l}.sort_by{_1[:start]}
+      p accepted_ranges.filter { |r| r[:letter] == l }.sort_by { _1[:start] }
     end
-    accepted_ranges.map{|r| r[:end] - r[:start]}.reduce(:*)
+    accepted_ranges.map { |r| r[:end] - r[:start] }.reduce(:*)
   end
 end
+# standard:enable Security/Eval

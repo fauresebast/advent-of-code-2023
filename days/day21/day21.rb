@@ -3,7 +3,7 @@ module Day21
     garden = input.split("\n")
     start = []
     garden.each_with_index do |line, row_index|
-      if col_index = line.index("S")
+      if (col_index = line.index("S"))
         start = [row_index, col_index]
         break
       end

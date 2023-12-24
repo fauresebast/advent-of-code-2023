@@ -5,7 +5,11 @@ module Day20
     def initialize(id, type_char, destinations)
       @id = id
       @type_char = type_char
-      @type = type_char == "" ? :broadcaster : (type_char == "%" ? :flipflop : :conjunction)
+      @type = if type_char == ""
+        :broadcaster
+      else
+        ((type_char == "%") ? :flipflop : :conjunction)
+      end
       @destinations = destinations
     end
 
@@ -35,7 +39,7 @@ module Day20
     end
 
     def flip!
-      @status = @status == :off ? :on : :off
+      @status = (@status == :off) ? :on : :off
     end
   end
 
@@ -52,7 +56,7 @@ module Day20
     end
 
     def get_signal
-      @memory.values.all?{ _1 == :high } ? :low : :high
+      (@memory.values.all? { _1 == :high }) ? :low : :high
     end
   end
 
@@ -89,7 +93,7 @@ module Day20
         pulse, sender, module_id = queue.shift
         # puts "#{sender} -#{pulse}-> #{module_id}"
         current = modules[module_id]
-        pulse == :low ? (low_pulses += 1) : (high_pulses += 1)
+        (pulse == :low) ? (low_pulses += 1) : (high_pulses += 1)
         next if current.nil?
 
         if current.broadcaster?
@@ -97,7 +101,7 @@ module Day20
         elsif current.flipflop?
           if pulse == :low
             current.flip!
-            current.destinations.each { |dest| queue << [current.status == :on ? :high : :low, current.id, dest] }
+            current.destinations.each { |dest| queue << [(current.status == :on) ? :high : :low, current.id, dest] }
           end
         elsif current.conjunction?
           current.set_memory(sender, pulse)
@@ -113,7 +117,7 @@ module Day20
 
   def self.part2(input)
     modules = parse(input)
-    conjunctions = modules.filter{|k, m| m.conjunction? }.map(&:last)
+    conjunctions = modules.filter { |k, m| m.conjunction? }.map(&:last)
     button_pressed = 0
     mem = {}
     loop do
@@ -137,7 +141,7 @@ module Day20
           if pulse == :low
             current.flip!
             current.destinations.each do |dest|
-              new_pulse = current.status == :on ? :high : :low
+              new_pulse = (current.status == :on) ? :high : :low
               return button_pressed if new_pulse == :low && dest == "rx"
               queue << [new_pulse, current.id, dest]
             end
