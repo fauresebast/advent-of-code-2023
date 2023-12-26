@@ -28,6 +28,7 @@ GEM
     matrix (0.4.2)
     minitest (5.20.0)
     mutex_m (0.2.0)
+    pairing_heap (3.0.1)
     parallel (1.23.0)
     parser (3.2.2.4)
       ast (~> 2.4.1)
@@ -38,6 +39,10 @@ GEM
       abbrev
     regexp_parser (2.8.2)
     rexml (3.2.6)
+    rgl (0.6.6)
+      pairing_heap (>= 0.3, < 4.0)
+      rexml (~> 3.2, >= 3.2.4)
+      stream (~> 0.5.3)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -83,6 +88,7 @@ GEM
       rubocop-performance (~> 1.19.1)
     standardrb (1.0.1)
       standard
+    stream (0.5.5)
     typeprof (0.21.8)
       rbs (>= 1.8.1)
     tzinfo (2.0.6)
@@ -97,6 +103,7 @@ DEPENDENCIES
   activesupport
   matrix
   rbs
+  rgl
   rspec
   standardrb
   typeprof
